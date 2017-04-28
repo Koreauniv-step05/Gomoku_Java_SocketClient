@@ -83,8 +83,8 @@ public class SocketclientImpl implements Socketclient {
     }
 
     public void sendNickName(String nickname) {
-        Data data = new Data("NickName",
-                            "NickName is "+nickname,
+        Data data = new Data("Nickname",
+                            "Nickname is "+nickname,
                             nickname);
         sendData(data);
     }
