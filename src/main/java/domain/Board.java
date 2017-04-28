@@ -1,6 +1,6 @@
 package domain;
 
-import static consts.BoardCondition.NONESTONE;
+import static consts.BOARD_CONDITION.NONESTONE;
 
 /**
  * Created by jaeyoung on 2017. 4. 29..

@@ -12,21 +12,28 @@ import io.socket.emitter.Emitter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import static consts.CONFIG.SOCKET_SESRVER_FULLDOMAIN;
+
 /**
  * Created by jaeyoung on 2017. 4. 29..
  */
 public class SocketclientImpl implements Socketclient {
     private Socket socket;
     private ObjectMapper mapper = new ObjectMapper();
+    private Listener listener;
 
     public SocketclientImpl() {
         runSocketThread.start();
     }
 
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
+
     private Runnable runSocketRunnable = new Runnable() {
         public void run() {
             try {
-                socket = IO.socket("http://localhost:8002");
+                socket = IO.socket(SOCKET_SESRVER_FULLDOMAIN);
                 socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
 
                     public void call(Object... objects) {
@@ -53,7 +60,13 @@ public class SocketclientImpl implements Socketclient {
                     }
                 }).on("to_client", new Emitter.Listener() {
                     public void call(Object... objects) {
-                        System.out.println("to_client "+objects.toString());
+                        try {
+                            Data obj = mapper.readValue(objects[0].toString(), Data.class);
+                            System.out.println("to_client "+obj.toString());
+                            listener.onReceiveCommandFromServer(obj);
+                        } catch(IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
 
@@ -65,8 +78,8 @@ public class SocketclientImpl implements Socketclient {
     };
     private Thread runSocketThread = new Thread(runSocketRunnable);
 
-    private void sendData(Data data) {
-        System.out.println("service.Socketclient/sendData : " + data.toString());
+    private void sendDataToServer(Data data) {
+        System.out.println("service.Socketclient/sendDataToServer : " + data.toString());
         try {
             String jsonInString = mapper.writeValueAsString(data);
             socket.emit("to_server", jsonInString);
@@ -79,13 +92,13 @@ public class SocketclientImpl implements Socketclient {
         Data data = new Data("NewStonePoint",
                 "NewStonePoint is "+axisX+", "+axisY,
                 new AxisSet(axisX, axisY, true));
-        sendData(data);
+        sendDataToServer(data);
     }
 
     public void sendNickName(String nickname) {
         Data data = new Data("Nickname",
                             "Nickname is "+nickname,
                             nickname);
-        sendData(data);
+        sendDataToServer(data);
     }
 }

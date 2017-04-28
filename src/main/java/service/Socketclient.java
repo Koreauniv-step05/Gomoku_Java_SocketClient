@@ -16,6 +16,10 @@ import java.net.URISyntaxException;
  * Created by jaeyoung on 2017. 4. 28..
  */
 public interface Socketclient {
+    interface Listener {
+        void onReceiveCommandFromServer(Data data);
+    }
+    void setListener(Listener listener);
     void sendNewStonePoint(int axisX, int axisY);
     void sendNickName(String nickname);
 }
