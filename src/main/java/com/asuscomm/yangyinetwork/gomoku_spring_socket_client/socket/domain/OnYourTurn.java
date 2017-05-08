@@ -1,5 +1,7 @@
 package com.asuscomm.yangyinetwork.gomoku_spring_socket_client.socket.domain;
 
+import java.util.Arrays;
+
 /**
  * Created by jaeyoung on 2017. 5. 8..
  */
@@ -29,5 +31,13 @@ public class OnYourTurn {
 
     public void setBoard(int[][] board) {
         this.board = board;
+    }
+
+    @Override
+    public String toString() {
+        return "OnYourTurn{" +
+                "stoneType=" + stoneType +
+                ", board=" + Arrays.toString(board) +
+                '}';
     }
 }

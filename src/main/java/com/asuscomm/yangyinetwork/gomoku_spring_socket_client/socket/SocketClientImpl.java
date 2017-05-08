@@ -6,6 +6,7 @@ import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.domain.CommandRepl
 import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.domain.CommandReplyWithChannel;
 import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.socket.consts.Commands;
 import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.socket.domain.SocketMessage;
+import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.socket.domain.SocketOnYourTurn;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import static com.asuscomm.yangyinetwork.gomoku_spring_socket_client.commons.Config.*;
+import static com.asuscomm.yangyinetwork.gomoku_spring_socket_client.socket.consts.Commands.CHANNEL.GENERAL_TO_CLIENT.ON_YOUR_TURN;
 import static com.asuscomm.yangyinetwork.gomoku_spring_socket_client.socket.consts.Commands.GENERAL.JOIN_CHANNEL;
 
 /**
@@ -87,7 +89,10 @@ public class SocketClientImpl implements SocketClient {
 
     public void sendChannelSocketMessage(SocketMessage socketMessage) {
         if(this.mChannelId != null) {
-            sendSocketMessage("/app/"+mChannelId+"/command", socketMessage);
+            logger.info("sendChannelSocketMessage"+socketMessage.toString());
+            sendSocketMessage("/app/"+mChannelId+"/to_server", socketMessage);
+        } else {
+            logger.info("sendChannelSocketMessage mChannelId is null");
         }
     }
 
@@ -149,6 +154,13 @@ public class SocketClientImpl implements SocketClient {
                     socketMessage = mapper.readValue(new String((byte[]) o), SocketMessage.class);
                 } catch (IOException e) {
                     e.printStackTrace();
+                }
+                if (ON_YOUR_TURN.equals(socketMessage.getCommand())) {
+                    try {
+                        socketMessage = (SocketMessage)mapper.readValue(new String((byte[]) o), SocketOnYourTurn.class);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 mListener.onToClient(socketMessage);

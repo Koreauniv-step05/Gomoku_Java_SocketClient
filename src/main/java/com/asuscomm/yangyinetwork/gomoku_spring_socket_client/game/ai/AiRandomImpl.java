@@ -10,6 +10,7 @@ import static com.asuscomm.yangyinetwork.gomoku_spring_socket_client.game.ai.uti
  * Created by jaeyoung on 2017. 5. 8..
  */
 public class AiRandomImpl implements Ai {
+
     public void findSolution(int[][] board, OnSolutionListener listener) {
         List<int[]> possibleNextStone = PossibleNextStone.possibleNextStone(board);
 
