@@ -7,7 +7,7 @@ public interface Config {
     String SOCKET_URL = "ws://{host}:{port}/gomoku";
 //    String SOCKET_HOST = "localhost";
     String SOCKET_HOST = "52.78.111.146";
-    int SOCKET_PORT = 8080;
+    int SOCKET_PORT = 80;
     //        String host = "52.78.111.146";
 //        int port = 80;
 
