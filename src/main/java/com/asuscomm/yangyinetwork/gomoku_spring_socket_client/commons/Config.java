@@ -14,4 +14,6 @@ public interface Config {
 
     String GENERAL_RECEIVE_TOPIC = "/topic/command/general";
     String GENERAL_SEND_TOPIC = "/app/general/command";
+
+    long CHOOSE_STONE_DELAY = 500;
 }

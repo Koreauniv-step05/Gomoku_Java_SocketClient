@@ -4,6 +4,7 @@ import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.game.ai.utils.Poss
 
 import java.util.List;
 
+import static com.asuscomm.yangyinetwork.gomoku_spring_socket_client.commons.Config.CHOOSE_STONE_DELAY;
 import static com.asuscomm.yangyinetwork.gomoku_spring_socket_client.game.ai.utils.ChooseRandomly.chooseRandomlyInStonePoints;
 
 /**
@@ -15,6 +16,12 @@ public class AiRandomImpl implements Ai {
         List<int[]> possibleNextStone = PossibleNextStone.possibleNextStone(board);
 
         int[] solution = chooseRandomlyInStonePoints(possibleNextStone);
+
+        try {
+            Thread.sleep(CHOOSE_STONE_DELAY);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         listener.onSolution(solution);
     }
 }
