@@ -4,22 +4,24 @@ package com.asuscomm.yangyinetwork.gomoku_spring_socket_client.client.socket.dom
  * Created by jaeyoung on 2017. 5. 8..
  */
 public class StonePoint {
-    private int[] stonePoint;
+    private int[][] stonePoint;
+    private int remainStones;
     private int stoneType;
 
     public StonePoint() {
     }
 
-    public StonePoint(int[] stonePoint, int stoneType) {
+    public StonePoint(int[][] stonePoint, int remainStones, int stoneType) {
         this.stonePoint = stonePoint;
+        this.remainStones = remainStones;
         this.stoneType = stoneType;
     }
 
-    public int[] getStonePoint() {
+    public int[][] getStonePoint() {
         return stonePoint;
     }
 
-    public void setStonePoint(int[] stonePoint) {
+    public void setStonePoint(int[][] stonePoint) {
         this.stonePoint = stonePoint;
     }
 
