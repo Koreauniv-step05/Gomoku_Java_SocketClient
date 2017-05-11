@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Ai_Connect6/gomoku_ai.iml" filepath="$PROJECT_DIR$/Ai_Connect6/gomoku_ai.iml" />
       <module fileurl="file://$PROJECT_DIR$/stomp-java-client.iml" filepath="$PROJECT_DIR$/stomp-java-client.iml" />
     </modules>
   </component>

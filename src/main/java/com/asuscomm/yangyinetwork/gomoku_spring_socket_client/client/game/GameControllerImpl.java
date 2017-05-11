@@ -4,14 +4,12 @@ import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.Main;
 import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.client.channel.ChannelController;
 import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.client.channel.ChannelControllerImpl;
 import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.client.socket.domain.StonePoint;
-import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.gomoku_ai.ai.JYP.AiJYPImpl;
-import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.gomoku_ai.ai.commons.Ai;
 import org.apache.log4j.Logger;
 
 import java.util.Arrays;
 import java.util.Stack;
 
-import static com.asuscomm.yangyinetwork.gomoku_spring_socket_client.gomoku_ai.utils.ArrayCompareUtils.isEmptyBoard;
+import static com.asuscomm.yangyinetwork.utils.ArrayCompareUtils.isEmptyBoard;
 
 /**
  * Created by jaeyoung on 2017. 5. 8..
@@ -21,13 +19,13 @@ public class GameControllerImpl implements ChannelController.Listener{
     private ChannelController mChannelController;
     private int[][] prevBoard;
     private Integer mStoneType;
-    private Ai mAi;
+    private com.asuscomm.yangyinetwork.ai.commons.Ai mAi;
     private Stack<StonePoint> stonePointStack;
 
     public GameControllerImpl() {
         this.getChannel();
 //        this.mAi = new AiRandomImpl();
-        this.mAi = new AiJYPImpl();
+        this.mAi = new com.asuscomm.yangyinetwork.ai.JYP.AiJYPImpl();
 
         new Thread(waitCommand).start();
         this.stonePointStack = new Stack<StonePoint>();
@@ -56,7 +54,7 @@ public class GameControllerImpl implements ChannelController.Listener{
         if(isEmptyBoard(board)) {
             remainStones = 1;
         }
-        mAi.findSolution(board,remainStones, new Ai.OnSolutionListener() {
+        mAi.findSolution(board,remainStones, new com.asuscomm.yangyinetwork.ai.commons.Ai.OnSolutionListener() {
             public void onSolution(int[][] stonePoint, int remainStones) {
                     logger.info("onNewStoneFromClient "+Arrays.toString(stonePoint));
                     StonePoint point = new StonePoint(stonePoint,remainStones, mStoneType);
