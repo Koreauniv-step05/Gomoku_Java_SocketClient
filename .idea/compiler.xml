@@ -11,6 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="gomoku_ai" target="1.5" />
       <module name="stomp-java-client" target="1.5" />
     </bytecodeTargetLevel>
   </component>

@@ -1,6 +1,6 @@
 package com.asuscomm.yangyinetwork.gomoku_spring_socket_client;
 
-import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.game.GameControllerImpl;
+import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.client.game.GameControllerImpl;
 
 
 /**
