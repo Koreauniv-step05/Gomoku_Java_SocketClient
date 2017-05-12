@@ -1,11 +1,11 @@
 package com.asuscomm.yangyinetwork.gomoku_spring_socket_client.client.game;
 
+import com.asuscomm.yangyinetwork.ai.JYP.AiJYPImpl;
+import com.asuscomm.yangyinetwork.ai.commons.Ai;
 import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.Main;
 import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.client.channel.ChannelController;
 import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.client.channel.ChannelControllerImpl;
 import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.client.socket.domain.StonePoint;
-import main.java.com.asuscomm.yangyinetwork.ai.JYP.AiJYPImpl;
-import main.java.com.asuscomm.yangyinetwork.ai.commons.Ai;
 import org.apache.log4j.Logger;
 
 import java.util.Arrays;
