@@ -5,10 +5,10 @@ package com.asuscomm.yangyinetwork.gomoku_spring_socket_client.client.commons;
  */
 public interface Config {
     String SOCKET_URL = "ws://{host}:{port}/gomoku";
-//    String SOCKET_HOST = "localhost";int SOCKET_PORT =8080;
-    String SOCKET_HOST = "52.78.111.146"; int SOCKET_PORT = 80;
+    String SOCKET_HOST = "localhost";int SOCKET_PORT =8080;
+//    String SOCKET_HOST = "52.78.111.146"; int SOCKET_PORT = 80;
 
-    String SOCKET_CHANNEL = "11";
+    String SOCKET_CHANNEL = "33";
 
     String GENERAL_RECEIVE_TOPIC = "/topic/command/general";
     String GENERAL_SEND_TOPIC = "/app/general/command";

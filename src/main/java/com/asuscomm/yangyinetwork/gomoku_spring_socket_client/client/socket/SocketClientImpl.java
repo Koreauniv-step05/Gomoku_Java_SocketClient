@@ -146,7 +146,7 @@ public class SocketClientImpl implements SocketClient {
             }
 
             public void handleFrame(StompHeaders stompHeaders, Object o) {
-                logger.info("Received greeting " + new String((byte[]) o));
+                logger.info("Received channel command " + new String((byte[]) o));
 
                 SocketMessage socketMessage = null;
                 ObjectMapper mapper = new ObjectMapper();

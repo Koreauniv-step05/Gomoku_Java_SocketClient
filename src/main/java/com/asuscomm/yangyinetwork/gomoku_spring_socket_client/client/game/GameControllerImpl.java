@@ -6,15 +6,20 @@ import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.Main;
 import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.client.channel.ChannelController;
 import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.client.channel.ChannelControllerImpl;
 import com.asuscomm.yangyinetwork.gomoku_spring_socket_client.client.socket.domain.StonePoint;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.Logger;
 
 import java.util.Arrays;
 import java.util.Stack;
 
+import static com.asuscomm.yangyinetwork.utils.ArrayCompareUtils.isEmptyBoard;
+import static com.asuscomm.yangyinetwork.utils.PrintUtils.printBoardWithNextStones;
+
 
 /**
  * Created by jaeyoung on 2017. 5. 8..
  */
+@Slf4j
 public class GameControllerImpl implements ChannelController.Listener{
     private Logger logger = Logger.getLogger(Main.class);
     private ChannelController mChannelController;
@@ -50,16 +55,17 @@ public class GameControllerImpl implements ChannelController.Listener{
         this.mChannelController.addListener(this);
     }
 
-    void findSolution(int[][] board) {
+    void findSolution(final int[][] board) {
         int remainStones = 2;
-//        if(isEmptyBoard(board)) {
+        if(isEmptyBoard(board)) {
+            log.info("GameControllerImpl/findSolution: emptyBoard");
             remainStones = 1;
-//        }
+        }
         mAi.findSolution(board,remainStones, new Ai.OnSolutionListener() {
             public void onSolution(int[][] stonePoint, int remainStones) {
-                    logger.info("onNewStoneFromClient "+Arrays.toString(stonePoint));
-                    StonePoint point = new StonePoint(stonePoint,remainStones, mStoneType);
-                    mChannelController.onNewStoneFromClient(point);
+                StonePoint point = new StonePoint(stonePoint,remainStones, mStoneType);
+                mChannelController.onNewStoneFromClient(point);
+                printBoardWithNextStones(board, stonePoint, mStoneType);
             }
         });
     }
@@ -73,9 +79,8 @@ public class GameControllerImpl implements ChannelController.Listener{
     }
 
     public void onYourTurn(int stoneType, int[][] board) {
-        logger.info("GameControllerImpl/onYourTurn: "+ stoneType + ", "+ Arrays.toString(board));
-
         if(stoneType == this.mStoneType) {
+            log.info("GameControllerImpl/onYourTurn: onMyTurn, myStoneType=[{}], stoneType =[{}]",this.mStoneType, stoneType);
             this.findSolution(board);
         }
     }
