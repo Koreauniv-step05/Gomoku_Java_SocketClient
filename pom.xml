@@ -61,7 +61,20 @@
             <artifactId>lombok</artifactId>
             <version>1.16.16</version>
         </dependency>
+        <dependency>
+            <groupId>com.asuscomm.yangyinetwork</groupId>
+            <artifactId>gomoku_ai</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>in-project</id>
+            <name>custom jars</name>
+            <url>file://${project.basedir}/lib</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>

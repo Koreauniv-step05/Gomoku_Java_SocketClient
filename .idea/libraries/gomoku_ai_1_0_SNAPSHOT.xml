@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="gomoku_ai-1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/com/asuscomm/yangyinetwork/gomoku_ai/1.0-SNAPSHOT/gomoku_ai-1.0-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
